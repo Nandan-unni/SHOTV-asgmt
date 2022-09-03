@@ -60,12 +60,12 @@ const Navbar = () => {
           />
           <FeatherIcon icon="search" className="text-gray-400 cursor-pointer" />
         </div>
-        <Button type="ghost" className="mx-4 hidden md:block">
+        <Button type="ghost" className="mx-4 !hidden md:!block">
           Login
         </Button>
         <Button
           type="primary"
-          className="hidden md:block !bg-themeColor !border-themeColor hover:bg-themeColor hover:border-red-600 active:bg-themeColor"
+          className="!hidden md:!block !bg-themeColor !border-themeColor hover:bg-themeColor hover:border-red-600 active:bg-themeColor"
         >
           Signup, It's free
         </Button>
