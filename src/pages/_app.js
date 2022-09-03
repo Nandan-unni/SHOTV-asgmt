@@ -1,8 +1,15 @@
 import React from "react";
+import MetaTags from "../components/MetaTags";
 import "../styles/globals.css";
+import "antd/dist/antd.css";
 
-const ShotV = ({ Component, pageProps }) => {
-  return <Component {...pageProps} />;
+const App = ({ Component, pageProps }) => {
+  return (
+    <>
+      <MetaTags title={"ShotV"} />
+      <Component {...pageProps} />
+    </>
+  );
 };
 
-export default ShotV;
+export default App;
