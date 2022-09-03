@@ -1,4 +1,13 @@
-# Zaamo Frontend Engineer SDE-1 Intern Assignment
+# Zaamo Frontend Engineer SDE-1 Intern
+
+## Tech
+
+- ReactJS
+- NextJS
+- Tailwind
+- Antd
+
+## Assignment
 
 Task details for the Frontend Engineer SDE-1 (Intern) position:
 
@@ -16,4 +25,4 @@ Task details for the Frontend Engineer SDE-1 (Intern) position:
 
 7. As the name suggests, the details page should contain all the details available about the TV show. The layout/design of this page is up to you.
 
-API to integrate: https://www.tvmaze.com/api
+- API to integrate: https://www.tvmaze.com/api
