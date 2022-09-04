@@ -1,14 +1,16 @@
 import { config } from "../../common/config";
-import { ReqHeader } from "./utils";
+import axios from "axios";
 
 const base = async (url, options) => {
-  const fetchUrl = config.API_URL + url;
-  const res = await fetch(fetchUrl, {
-    headers: ReqHeader,
-    ...{ ...options, body: JSON.stringify(options.data) },
+  const res = await axios({
+    baseURL: config.API_URL,
+    headers: {
+      Accept: "application/json",
+    },
+    ...options,
+    url,
   });
-  const data = await res.json();
-  return { data, status: res.status };
+  return { data: res.data, status: res.status };
 };
 
 export const get = (url, params = {}) => {

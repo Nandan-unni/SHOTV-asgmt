@@ -1,19 +1,36 @@
-import { message, Spin } from "antd";
+import { message, Row, Spin } from "antd";
 import React, { useEffect, useState } from "react";
 import { getFullSchedule } from "../../infrastructure/schedule";
 import Navbar from "../components/Navbar";
 import ShowSection from "../components/ShowSection";
 import { showData } from "../data/show";
+import { numericalSort, timeSort } from "../utils/sorters";
 
 const Index = () => {
   const [loading, setLoading] = useState(true);
-  const [shows, setShows] = useState(null);
+  const [latestShows, setLatestShows] = useState(null);
+  const [popularShows, setPopularShows] = useState(null);
+  const [recoShows, setRecoShows] = useState(null);
 
   useEffect(() => {
-    if (shows === null) {
+    if (latestShows === null) {
       getFullSchedule()
-        .then((res) => console.log(res.data))
-        .catch((err) => console.log(err))
+        .then((res) => {
+          let allShows = res.data?.filter((show) => show.image);
+          console.log(allShows.map((i) => i.type));
+          console.log(allShows.map((i) => i.rating?.average));
+          let latestShows = allShows?.sort((a, b) =>
+            timeSort(a?.airstamp, b?.airstamp)
+          );
+          let popularShows = allShows?.sort((a, b) =>
+            numericalSort(a?.rating?.average, b?.rating?.average)
+          );
+          let recoShows = allShows?.filter((a) => a?.type === "regular");
+          setLatestShows(latestShows?.slice(0, 20));
+          setPopularShows(popularShows?.slice(0, 20));
+          setRecoShows(recoShows?.slice(0, 20));
+        })
+        .catch((err) => message.error("Some error occured"))
         .finally(() => setLoading(false));
     }
   }, []);
@@ -22,27 +39,14 @@ const Index = () => {
     <div>
       <Navbar />
       {loading ? (
-        <Spin tip="Loading" />
+        <Row style={{ minHeight: "50vh" }} align="middle" justify="center">
+          <Spin tip="Loading" />
+        </Row>
       ) : (
         <div className="pb-16">
-          <ShowSection
-            title="Latest & Trending"
-            shows={Array(10)
-              .fill(0)
-              .map((_) => showData)}
-          />
-          <ShowSection
-            title="Popular"
-            shows={Array(10)
-              .fill(0)
-              .map((_) => showData)}
-          />
-          <ShowSection
-            title="Recommended for you"
-            shows={Array(10)
-              .fill(0)
-              .map((_) => showData)}
-          />
+          <ShowSection title="Latest & Trending" shows={latestShows} />
+          <ShowSection title="Popular" shows={popularShows} />
+          <ShowSection title="Recommended for you" shows={recoShows} />
         </div>
       )}
     </div>
