@@ -7,11 +7,20 @@ const ShowCard = ({ showData }) => {
   return (
     <Link href={routes.SHOW_DETAILS(showData?.id)}>
       <div
-        className="w-[200px] cursor-pointer mx-2 relative rounded-lg overflow-hidden"
+        className="w-[300px] cursor-pointer mx-2 relative rounded-lg overflow-hidden"
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
         <img className="w-full h-auto" src={showData?.image?.original} />
+        <div
+          className={`trans3 overflow-hidden flex items-end w-full absolute z-10 bottom-0 bg-gradient-to-t from-black to-transparent text-white ${
+            isHovering ? "h-0 p-0" : "h-[70px] p-4"
+          }`}
+        >
+          <h2 className="text-white font-semibold text-lg mb-0">
+            {showData?.name}
+          </h2>
+        </div>
         <div
           className={`trans3 flex flex-col justify-end w-full overflow-hidden absolute z-10 bottom-0 bg-gradient-to-t from-black to-transparent text-white ${
             isHovering ? "h-[300px] p-4" : "h-0 p-0"
