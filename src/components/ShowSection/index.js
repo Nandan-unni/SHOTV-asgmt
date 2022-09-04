@@ -9,10 +9,11 @@ const ShowSection = ({ title = "", shows = [] }) => {
   useEffect(() => {
     setSlidesToShow(() => {
       if (isSsr) return 5;
+      else if (window.innerWidth >= 1600) return 5;
       else if (window.innerWidth >= 1300) return 4;
-      else if (window.innerWidth >= 1150) return 3;
-      else if (window.innerWidth >= 998) return 3;
-      else if (window.innerWidth >= 700) return 2;
+      else if (window.innerWidth >= 1050) return 3;
+      else if (window.innerWidth >= 880) return 3;
+      else if (window.innerWidth >= 600) return 2;
       else if (window.innerWidth >= 500) return 1;
       else return 1;
     });

@@ -7,11 +7,16 @@ const ShowCard = ({ showData }) => {
   return (
     <Link href={routes.SHOW_DETAILS(showData?.id)}>
       <div
-        className="w-[300px] cursor-pointer mx-2 relative rounded-lg overflow-hidden"
+        className="w-[250px] lg:w-[300px] cursor-pointer mx-2 relative rounded-lg overflow-hidden"
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
-        <img className="w-full h-auto" src={showData?.image?.original} />
+        <img
+          className={`w-full h-auto ${
+            isHovering ? "scale-150" : "scale-100"
+          } hover:ease-in duration-500`}
+          src={showData?.image?.original}
+        />
         <div
           className={`trans3 overflow-hidden flex items-end w-full absolute z-10 bottom-0 bg-gradient-to-t from-black to-transparent text-white ${
             isHovering ? "h-0 p-0" : "h-[70px] p-4"
