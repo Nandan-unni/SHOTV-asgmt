@@ -25,8 +25,11 @@ const ShowCard = ({ showData }) => {
             {showData?.type}, {showData?.language}
           </p>
           <div className="flex flex-wrap">
-            {showData?.genres?.map((genre) => (
-              <p className="m-0 bg-[#303030] text-[#f6f6f6] rounded-full text-xs px-2 mr-2 mb-1">
+            {showData?.genres?.map((genre, i) => (
+              <p
+                key={i}
+                className="m-0 bg-[#303030] text-[#f6f6f6] rounded-full text-xs px-2 mr-2 mb-1"
+              >
                 {genre}
               </p>
             ))}

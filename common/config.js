@@ -3,7 +3,7 @@ const ENV = process.env.NODE_ENV;
 const local = {
   ENV,
   APP_URL: `http://localhost:3000/`,
-  API_URL: `https://www.tvmaze.com/api/`,
+  API_URL: `https://api.tvmaze.com/`,
 };
 
 const development = {
@@ -13,7 +13,7 @@ const development = {
 const production = {
   ...development,
   APP_URL: `https://electroswap.vercel.app/`,
-  API_URL: `https://www.tvmaze.com/api/`,
+  API_URL: `https://api.tvmaze.com/`,
 };
 
 const configs = { local, development, production };
