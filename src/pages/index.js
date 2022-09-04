@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { getFullSchedule } from "../../infrastructure/schedule";
 import Navbar from "../components/Navbar";
 import ShowSection from "../components/ShowSection";
-import { showData } from "../data/show";
 import { numericalSort, timeSort } from "../utils/sorters";
 
 const Index = () => {
@@ -17,8 +16,6 @@ const Index = () => {
       getFullSchedule()
         .then((res) => {
           let allShows = res.data?.filter((show) => show.image);
-          console.log(allShows.map((i) => i.type));
-          console.log(allShows.map((i) => i.rating?.average));
           let latestShows = allShows?.sort((a, b) =>
             timeSort(a?.airstamp, b?.airstamp)
           );
@@ -40,7 +37,7 @@ const Index = () => {
       <Navbar />
       {loading ? (
         <Row style={{ minHeight: "50vh" }} align="middle" justify="center">
-          <Spin tip="Loading" />
+          <Spin tip="Loading shows..." />
         </Row>
       ) : (
         <div className="pb-16">

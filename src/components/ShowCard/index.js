@@ -11,7 +11,7 @@ const ShowCard = ({ showData }) => {
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
-        <img className="w-full h-auto" src={showData?.image?.medium} />
+        <img className="w-full h-auto" src={showData?.image?.original} />
         <div
           className={`trans3 flex flex-col justify-end w-full overflow-hidden absolute z-10 bottom-0 bg-gradient-to-t from-black to-transparent text-white ${
             isHovering ? "h-[300px] p-4" : "h-0 p-0"

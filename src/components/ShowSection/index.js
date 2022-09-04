@@ -26,11 +26,8 @@ const ShowSection = ({ title = "", shows = [] }) => {
         <div className="rounded-full h-[4px] w-[4px] bg-gray-400 ml-2"></div>
       </div>
       <Carousel autoplay slidesToShow={slidesToShow}>
-        {shows.map((show, i) => (
-          <ShowCard
-            key={`${show.id}-${i}`}
-            showData={{ ...show, id: `${show.id}-${i}` }}
-          />
+        {shows.map((show) => (
+          <ShowCard key={show?.id} showData={show} />
         ))}
       </Carousel>
     </div>
