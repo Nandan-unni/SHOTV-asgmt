@@ -7,9 +7,11 @@ import { numericalSort, timeSort } from "../utils/sorters";
 
 const Index = () => {
   const [loading, setLoading] = useState(true);
+  const [allShows, setAllShows] = useState(null);
   const [latestShows, setLatestShows] = useState(null);
   const [popularShows, setPopularShows] = useState(null);
   const [recoShows, setRecoShows] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     if (latestShows === null) {
@@ -23,6 +25,7 @@ const Index = () => {
             numericalSort(a?.rating?.average, b?.rating?.average)
           );
           let recoShows = allShows?.filter((a) => a?.type === "regular");
+          setAllShows(allShows);
           setLatestShows(latestShows?.slice(0, 20));
           setPopularShows(popularShows?.slice(0, 20));
           setRecoShows(recoShows?.slice(0, 20));
@@ -34,16 +37,27 @@ const Index = () => {
 
   return (
     <div>
-      <Navbar />
+      <Navbar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       {loading ? (
         <Row style={{ minHeight: "50vh" }} align="middle" justify="center">
           <Spin tip="Loading shows..." />
         </Row>
       ) : (
         <div className="pb-16">
-          <ShowSection title="Latest & Trending" shows={latestShows} />
-          <ShowSection title="Popular" shows={popularShows} />
-          <ShowSection title="Recommended for you" shows={recoShows} />
+          {searchQuery ? (
+            <ShowSection
+              title="Search Results"
+              shows={allShows?.filter((sh) =>
+                sh?.name?.toLowerCase()?.includes(searchQuery)
+              )}
+            />
+          ) : (
+            <>
+              <ShowSection title="Latest & Trending" shows={latestShows} />
+              <ShowSection title="Popular" shows={popularShows} />
+              <ShowSection title="Recommended for you" shows={recoShows} />
+            </>
+          )}
         </div>
       )}
     </div>

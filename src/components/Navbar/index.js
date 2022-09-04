@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Button, Drawer } from "antd";
 import FeatherIcon from "../FeatherIcon";
+import Link from "next/link";
+import routes from "../../utils/routes";
 
 const NavbarItems = [
   { label: "Movies" },
@@ -8,13 +10,20 @@ const NavbarItems = [
   { label: "News" },
 ];
 
-const Navbar = () => {
+const Navbar = ({ searchQuery, setSearchQuery }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="flex items-center justify-between min-h-[80px] px-8 md:px-10 lg:px-12 shadow-md">
       <Drawer
-        title={<img src="/assets/logo_black.svg" className="max-w-[80px]" />}
+        title={
+          <Link href={routes.HOME}>
+            <img
+              src="/assets/logo_black.svg"
+              className="cursor-pointer max-w-[80px]"
+            />
+          </Link>
+        }
         closable
         placement="left"
         onClose={() => setIsOpen(false)}
@@ -38,10 +47,12 @@ const Navbar = () => {
           className="mr-6 cursor-pointer lg:hidden"
           onClick={() => setIsOpen((prev) => !prev)}
         />
-        <img
-          src="/assets/logo_black.svg"
-          className="max-w-[80px] md:max-w-[80px] lg:max-w-[100px] mr-4 lg:mr-8 pb-2"
-        />
+        <Link href={routes.HOME}>
+          <img
+            src="/assets/logo_black.svg"
+            className="cursor-pointer max-w-[80px] md:max-w-[80px] lg:max-w-[100px] mr-4 lg:mr-8 pb-2"
+          />
+        </Link>
         {NavbarItems.map((item) => (
           <div
             key={item.label}
@@ -57,6 +68,7 @@ const Navbar = () => {
           <input
             className="outline-none px-0 lg:px-2 py-1"
             placeholder="Search"
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
           <FeatherIcon icon="search" className="text-gray-400 cursor-pointer" />
         </div>

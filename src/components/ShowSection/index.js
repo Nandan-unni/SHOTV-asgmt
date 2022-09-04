@@ -1,4 +1,4 @@
-import { Carousel } from "antd";
+import { Carousel, Empty } from "antd";
 import React, { useEffect, useState } from "react";
 import { isSsr } from "../../../common/constants";
 import ShowCard from "../ShowCard";
@@ -25,11 +25,15 @@ const ShowSection = ({ title = "", shows = [] }) => {
         <div className="rounded-full h-[3px] w-[250px] bg-gray-200"></div>
         <div className="rounded-full h-[4px] w-[4px] bg-gray-400 ml-2"></div>
       </div>
-      <Carousel autoplay slidesToShow={slidesToShow}>
-        {shows.map((show) => (
-          <ShowCard key={show?.id} showData={show} />
-        ))}
-      </Carousel>
+      {shows?.length === 0 ? (
+        <Empty description="No shows found." />
+      ) : (
+        <Carousel autoplay slidesToShow={slidesToShow}>
+          {shows.map((show) => (
+            <ShowCard key={show?.id} showData={show} />
+          ))}
+        </Carousel>
+      )}
     </div>
   );
 };
